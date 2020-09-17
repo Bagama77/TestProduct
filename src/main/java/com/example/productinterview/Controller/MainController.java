@@ -39,6 +39,7 @@ public class MainController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Product updateProduct(@RequestBody Product product, @PathVariable int id) throws ProductIdMismatchException, ProductNotFoundException{
         if (product.getId() != id) {
             throw new ProductIdMismatchException();

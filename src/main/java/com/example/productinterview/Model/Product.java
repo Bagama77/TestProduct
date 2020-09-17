@@ -18,7 +18,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
     @Column(nullable = false, unique = true)
-    @Size(min = 3, max = 15)
+    @Size(min = 3, max = 50)
     private String name;
     @Column(nullable = false, unique = true)
     private Date date;
