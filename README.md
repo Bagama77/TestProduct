@@ -54,4 +54,5 @@ API:
  3. In terminal run docker container: docker run --rm --name product -p 8081:8081 9e217b98b5d2
  
  Docker image : https://drive.google.com/file/d/1UIJCKywcbY4C_767QZXokUiNUGFJ6Ssm/view?usp=sharing
+ Docker image link on Docker hub: docker pull bagama/product_rest_api:latest
  
