@@ -52,5 +52,6 @@ API:
  1. In console: mvn spring-boot:run
  2. In IDE run main class: ProductinterviewApplication
  3. In terminal run docker container: docker run --rm --name product -p 8081:8081 9e217b98b5d2
+ 
  Docker image : https://drive.google.com/file/d/1UIJCKywcbY4C_767QZXokUiNUGFJ6Ssm/view?usp=sharing
  
