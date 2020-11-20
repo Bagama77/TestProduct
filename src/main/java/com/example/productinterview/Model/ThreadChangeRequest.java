@@ -1,6 +1,7 @@
 package com.example.productinterview.Model;
 
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Component("prototype")
+@Component
+@Scope("prototype")
 public class ThreadChangeRequest {
     @Id
     @GeneratedValue
