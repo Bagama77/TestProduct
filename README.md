@@ -1,59 +1,44 @@
 # TestProduct
-Simple REST API application.
+Spring-boot application. 
+There is a variable(counter) that can be shared by all the clients, the initial value of the counter is 50.
 
-Base entity Product. Droduct properties are: 
-1. Id  - number;
-2. Name - string from 3 to 50 characters;
-3. Price - number with 2 digits after point;
-4. Date - creation or updated date
+There is an ENDPOINT that receives two request parameters, the first one increases the number of producer threads. The second parameter increases the number of consumer threads.
 
-Implemented functions:
-1. FindAll - returns list of products;
-2. Create - saves new product into repository, returns saved product with id;
-3. Update - save updated product into repository, returns updated product;
-4. Delete - deletes entity from repository, returns empty string;
+         The response is HTTP 201 Created success status.
+
+In MySQL, persists the request's information received by the app to the database.
+
+The producer threads will increase the value of the counter while the consumer threads will decrease it. 
+
+Printing in the console the current value of the counter when it changes and print which producer/consumer is responsible for the change.
+
+The threads are running in parallel and continue until the counter reaches 0 or 100. Persist in the database the timestamp when the counter reaches 0 or 100.
+
+g. Create another ENDPOINT that will receive one parameter, the parameter will change the current value of the counter.
+
+	The response will be HTTP 200 Ok success status.
 
 API:
-1. Find all products - 
 
-  curl --location --request GET 'localhost:8081/products/all'
+1. Set counter to some particular value:
 
-2. Create new product - 
+  curl --location --request GET 'localhost:8081/counts/change/50'
 
-  curl --location --request POST 'localhost:8081/products/add' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-      "name": "NameProduct",
-      "date": "2022-09-15T21:00:00.000+00:00",
-      "price": 22.34
-  }'
-  
- 3. Update product - 
- 
-  curl --location --request PUT 'localhost:8081/products/1' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-          "id": 1,
-          "name": "Product 111 ",
-          "date": "1997-06-09T21:00:00.000+00:00",
-          "price": 121.34
-      }'
-      
- 4. Delete product - 
- 
-  curl --location --request DELETE 'localhost:8081/products/1' \
-  --data-raw ''
-  
- Repository implemented in H2 in memory database. Access to database through browser with endpoint: http://localhost:8081/h2-console/
- Username: sa
- Password: password
- 
+2. Change the number of producer/consumer threads
+
+curl --location --request GET 'localhost:8081/counts/50/40'
+
+where 50 are producers and 40 - consumers
+
+
+Application uses MySql Server to persist some data (every request to change producers/consumers, every request to set counter when counter becomes 0 or 100)
+
  How to run application:
  1. In console: mvn spring-boot:run
  2. In IDE run main class: ProductinterviewApplication
- 3. In terminal run docker container: docker run --rm --name product -p 8081:8081 9e217b98b5d2
+ 3. In terminal run docker container: docker run --rm --name counter -p 8081:8081 8b4000cf63e3
  
- Docker image : https://drive.google.com/file/d/1UIJCKywcbY4C_767QZXokUiNUGFJ6Ssm/view?usp=sharing
+ Docker image : https://hub.docker.com/repository/docker/bagama/consumer_producer_threads
  
- Docker image link on Docker hub: docker pull bagama/product_rest_api:latest
+ Docker image link on Docker hub: docker pull bagama/consumer_producer_threads:latest
  
